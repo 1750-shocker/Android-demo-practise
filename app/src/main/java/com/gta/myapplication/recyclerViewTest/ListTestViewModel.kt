@@ -8,7 +8,7 @@ import java.util.Collections
 
 class ListTestViewModel : ViewModel() {
 
-    //不把数据源给adapter了，因为用了DiffUtil，用submitList
+    //不把数据源给adapter了，因为用了ListAdapter，用submitList
     private val _items = MutableLiveData<List<Item>>(emptyList())
     //专供observe
     val items: LiveData<List<Item>> = _items

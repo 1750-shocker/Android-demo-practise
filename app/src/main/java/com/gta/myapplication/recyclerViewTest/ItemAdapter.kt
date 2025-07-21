@@ -60,6 +60,9 @@ class ItemAdapter(private val onDeleteItem: (Int) -> Unit) ://?什么是ListAdap
         holder.bind(item, position == expandedPosition)
     }
 
+    //非inner类（静态嵌套类）不会持有外部类的隐式引用
+    //所有依赖都通过构造函数明确传递，更容易测试，因为不依赖外部类状态
+    //不需要访问Adapter的成员，ViewHolder不应知道Adapter的存在
     class ItemViewHolder(
         private val binding: ItemLayoutBinding,
         private val onCardClick: (Int) -> Unit,
