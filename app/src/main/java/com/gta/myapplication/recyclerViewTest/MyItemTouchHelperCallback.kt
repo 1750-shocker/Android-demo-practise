@@ -27,7 +27,7 @@ class MyItemTouchHelperCallback(
     ): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
         val swipeFlags = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-        return makeMovementFlags(dragFlags, swipeFlags)
+        return makeMovementFlags(0, swipeFlags)
     }
 
     /**
@@ -87,7 +87,7 @@ class MyItemTouchHelperCallback(
      * 返回是否支持长按拖拽。默认为true。
      * 如果返回false，你需要自己调用 itemTouchHelper.startDrag(viewHolder) 来手动触发拖拽。
      */
-    override fun isLongPressDragEnabled(): Boolean = true
+    override fun isLongPressDragEnabled(): Boolean = false
 
     /**
      * 返回是否支持滑动。默认为true。

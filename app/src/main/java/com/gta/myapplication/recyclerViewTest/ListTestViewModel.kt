@@ -8,21 +8,19 @@ import java.util.Collections
 
 class ListTestViewModel : ViewModel() {
 
+    //不把数据源给adapter了，因为用了DiffUtil，用submitList
     private val _items = MutableLiveData<List<Item>>(emptyList())
+    //专供observe
     val items: LiveData<List<Item>> = _items
 
     private var nextId = 1
     init {
         // 初始化一些假数据
-        loadItems()
-    }
-
-    private fun loadItems() {
-        val initialList = (1..20).map { Item(id = it, title = "Item $it", description = "Description $it") }
-        _items.value = initialList
+        addAllItems()
     }
     /**
      * 处理Item被拖拽移动的逻辑
+     * 这个方法要放在数据源所在地，通过回调设置给别人
      */
     fun onItemMoved(fromPosition: Int, toPosition: Int) {
         // 1. 获取当前的列表
@@ -39,6 +37,7 @@ class ListTestViewModel : ViewModel() {
      * 处理Item被滑动删除的逻辑
      */
     fun onItemDeleted(position: Int) {
+        //修改数据源
         val currentList = _items.value?.toMutableList() ?: return
         currentList.removeAt(position)
         _items.value = currentList
@@ -75,7 +74,7 @@ class ListTestViewModel : ViewModel() {
         nextId = 1
     }
 
-    // 新增：删除单个项目
+    // 新增：删除单个项目，这个方法最终设置到布局中的删除按钮
     fun deleteItem(itemId: Int) {
         val currentList = _items.value?.toMutableList() ?: return
         val updatedList = currentList.filter { it.id != itemId }

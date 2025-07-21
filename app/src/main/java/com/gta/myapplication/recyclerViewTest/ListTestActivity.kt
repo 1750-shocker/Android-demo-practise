@@ -40,7 +40,8 @@ class ListTestActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
 
-        // 1. 创建Callback实例，并将事件委托给ViewModel
+        // 1. 滑动删除要用的，创建Callback实例，并将事件委托给ViewModel
+        //第一个是长按拖动，和那个onLongClick冲突了，所以我在内部禁用了这个
         val itemTouchHelperCallback = MyItemTouchHelperCallback(
             onItemMove = { fromPosition, toPosition ->
                 // 当拖拽发生时，通知ViewModel
@@ -57,7 +58,7 @@ class ListTestActivity : AppCompatActivity() {
         // 2. 创建ItemTouchHelper并附加到RecyclerView
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
-        // 传入删除项目的回调
+        // 传入删除项目的回调，这个就是删除按钮的逻辑
         adapter = ItemAdapter { itemId ->
             viewModel.deleteItem(itemId)
         }
