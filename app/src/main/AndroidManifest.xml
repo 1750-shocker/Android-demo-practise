@@ -15,6 +15,21 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".itemTypeTest.ItemTypeTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".databindingTest.TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pagingTest.PagingTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".livedataBusTest.SecondActivity"
+            android:exported="false" />
+        <activity
+            android:name=".livedataBusTest.FirstActivity"
+            android:exported="false" />
+        <activity
             android:name=".recyclerViewTest.ListTestActivity"
             android:exported="false" />
         <activity

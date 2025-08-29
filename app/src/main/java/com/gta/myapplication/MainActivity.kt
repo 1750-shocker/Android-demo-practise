@@ -13,7 +13,9 @@ import com.gta.myapplication.debugDemo.DeBugActivity
 import com.gta.myapplication.flatMapLatestTest.FlatMapActivity
 import com.gta.myapplication.flatMapLatestTest.NestedCollectActivity
 import com.gta.myapplication.itemDecorationTest.TestDecorationActivity
+import com.gta.myapplication.itemTypeTest.ItemTypeTestActivity
 import com.gta.myapplication.observeForeverTest.ObserveActivity
+import com.gta.myapplication.pagingTest.PagingTestActivity
 import com.gta.myapplication.recyclerViewTest.ListTestActivity
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.button2.setOnClickListener {
-            startActivity(Intent(this, ListTestActivity::class.java))
+            startActivity(Intent(this, ItemTypeTestActivity::class.java))
         }
     }
 }
