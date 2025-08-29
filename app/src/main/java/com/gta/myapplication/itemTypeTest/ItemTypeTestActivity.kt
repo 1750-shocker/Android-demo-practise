@@ -57,19 +57,39 @@ class ItemTypeTestActivity : AppCompatActivity() {
         ))
 
         // 添加网格项
-        for (i in 2..7) {
+        for (i in 2..4) {
             sampleData.add(GridItem(i.toLong(), "网格项目 $i", "描述 $i"))
         }
 
         // 再添加一个可展开项
         sampleData.add(ExpandableItem(
-            8,
+            5,
             "展开文本项目 2",
             "另一个可展开的文本内容示例。这个内容也比较长，用来演示在RecyclerView中如何实现文本的展开和收起功能。用户可以通过点击箭头按钮来控制文本的显示状态。这种设计模式在很多应用中都有使用，特别是在需要显示大量文本信息但又要保持界面整洁的场景下。"
         ))
+        // 添加更多网格项
+        for (i in 6..8) {
+            sampleData.add(GridItem(i.toLong(), "网格项目 $i", "描述 $i"))
+        }
+        // 添加另一个短文本项（不会显示箭头）
+        sampleData.add(ExpandableItem(
+            9,
+            "另一个短文本",
+            "这也是短内容。"
+        ))
 
         // 添加更多网格项
-        for (i in 9..15) {
+        for (i in 10..12) {
+            sampleData.add(GridItem(i.toLong(), "网格项目 $i", "描述 $i"))
+        }
+        // 再添加一个长文本可展开项（会显示箭头）
+        sampleData.add(ExpandableItem(
+            13,
+            "长文本项目 2",
+            "另一个可展开的长文本内容示例。这个内容也比较长，用来演示在RecyclerView中如何实现文本的展开和收起功能。用户可以通过点击箭头按钮来控制文本的显示状态。这种设计模式在很多应用中都有使用，特别是在需要显示大量文本信息但又要保持界面整洁的场景下。"
+        ))
+        // 添加最后的网格项
+        for (i in 14..15) {
             sampleData.add(GridItem(i.toLong(), "网格项目 $i", "描述 $i"))
         }
 

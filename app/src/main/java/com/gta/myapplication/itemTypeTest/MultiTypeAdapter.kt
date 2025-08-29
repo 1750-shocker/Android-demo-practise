@@ -52,17 +52,48 @@ class MultiTypeAdapter : ListAdapter<ListItem, RecyclerView.ViewHolder>(DiffCall
         private val contentText: TextView = itemView.findViewById(R.id.contentText)
         private val expandIcon: ImageView = itemView.findViewById(R.id.expandIcon)
         private var isExpanded = false
+        private var needsExpansion = false
 
         fun bind(item: ExpandableItem) {
             titleText.text = item.title
             contentText.text = item.content
+            isExpanded = false
 
+            // 重置为收起状态
             updateExpandState()
 
-            expandIcon.setOnClickListener {
-                isExpanded = !isExpanded
-                updateExpandState()
+            // 检查是否需要展开功能
+            contentText.post {
+                checkIfExpansionNeeded()
             }
+
+            expandIcon.setOnClickListener {
+                if (needsExpansion) {
+                    isExpanded = !isExpanded
+                    updateExpandState()
+                }
+            }
+        }
+
+        private fun checkIfExpansionNeeded() {
+            // 临时设置为无限行数来测量完整文本
+            val maxLines = contentText.maxLines
+            contentText.maxLines = Int.MAX_VALUE
+
+            // 强制重新测量
+            contentText.measure(
+                View.MeasureSpec.makeMeasureSpec(contentText.width, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            )
+
+            val lineCount = contentText.lineCount
+            needsExpansion = lineCount > 2
+
+            // 恢复原来的行数限制
+            contentText.maxLines = maxLines
+
+            // 根据是否需要展开来显示/隐藏箭头
+            expandIcon.visibility = if (needsExpansion) View.VISIBLE else View.INVISIBLE
         }
 
         private fun updateExpandState() {
